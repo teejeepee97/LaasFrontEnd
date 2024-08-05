@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book reservation</title>
+</head>
+<script>
+    const availableBooks = ["Boek1","Boek3"];
+
+    function reserveerBoek(boek, nummer){
+        let boekVar = boek.closest('tr').cells[0].textContent;
+        let var2    = boek.closest('tr').cells[1].textContent;
+        let beschikVar = boek.closest('tr').cells[2].textContent;
+        if(beschikVar == "Ja"){
+            document.getElementById("gereserveerd"+nummer).innerHTML = boekVar + " is gereserveerd voor jou!";
+        }
+        else{
+            document.getElementById("gereserveerd"+nummer).innerHTML = boekVar + " is op dit moment niet beschikbaar.";
+        }
+        console.log(beschikVar == 'Ja');
+        console.log(beschikVar, typeof beschikVar);
+    }
+
+    function addBook(){
+        let title = document.getElementById("new-title").value
+        let amount = document.getElementById("new-amount").value
+        let available = document.getElementById("new-available").value
+
+        fetch("http://localhost:8082/addBook/"+ title + "/" + amount + "/" + available);
+
+        console.log(title)
+        console.log(amount)
+        console.log(available)
+
+        //fetch("http://localhost:8082/nieuweFiets/"+prijs)
+        //fetch("http://localhost:8082/nieuweFiets/"+bouwdatum)
+
+        // document.getElementById("new-title").value = "";
+        // document.getElementById("new-amount").value = "";
+        // document.getElementById("new-available").value = "";
+
+        document.getElementById("addBoekAlert").innerHTML = "Boek toegevoegd: " + title;
+    }
+    
+    async function showBooks(){         
+    // Need bs.findall() in booksEndpoint to get all the books.
+        console.log("check1");           
+        try{
+            const response = await fetch("http://localhost:8082/showBooks");
+            console.log(response);
+            if(!response.ok){
+                throw new Error(`Response status: ${response.status}`);
+            }
+            const json = await response.json();
+            console.log(json);
+            var eindString = "<table border=1>";
+            eindString += "<tr><td>ID</td><td>Name</td><td>Amount</td><td>Available</td></tr>"
+            for(var x = 0; x < json.length; x++){
+                eindString += "<tr><td>"+json[x].physicalContentId+"</td><td>"+json[x].contentName+"</td><td>"+json[x].amount+"</td><td>"+json[x].available+"</td></tr>";
+            }
+            eindString += "</table>";
+            document.getElementById("TMTable").innerHTML = eindString;
+        }
+        catch(error){
+            console.error(error.message)
+        }
+    }
+
+    function reserveFrontEnd(){
+        let userId = document.getElementById("new-userId").value
+        let physicalContentId = document.getElementById("new-physicalContentId").value
+        try{
+            fetch("http://localhost:8082/reserveFrontEnd/"+ userId + "/" + physicalContentId);
+            document.getElementById("boekGereserveerd").innerHTML = physicalContentId + " gereserveerd door " + userId;
+        }
+        catch(error){
+            console.log(error.message);
+        }
+        
+    }
+
+    async function IdCheck(){
+        let inputId = document.getElementById("new-id").value;          
+        try{
+            const response = await fetch("http://localhost:8082/showBooks");
+            console.log(response);
+            if(!response.ok){
+                throw new Error(`Response status: ${response.status}`);
+            }
+            const json = await response.json();
+            console.log(json);
+            var checkedId = 0;
+            for(var x = 0; x < json.length; x++){
+                if(json[x].physicalContentId == inputId){
+                    checkedId = json[x].contentName;
+                }
+            }
+            document.getElementById("IdName").innerHTML = checkedId;
+        }
+        catch(error){
+            console.error(error.message)
+        }
+    }
+</script>
+<body>
+    <h1>Boek aan database toevoegen</h1>
+
+    <form>
+        <input type="text" id="new-title" name="title" placeholder="titel">
+        <input type="number" step="1" id="new-amount" name="amount" placeholder="aantal">
+        <label id="beschikbaarheid">beschikbaar:</label><input type="checkbox" id="new-available" name="available"><br>
+        <button onclick="addBook()">Boek toevoegen</button><br>
+        <div id="addBoekAlert">.</div>
+    </form>
+  
+    
+    <h1>Boek reserveren</h1>
+    <input type="text" id="new-userId" placeholder="userId">
+    <input type="text" id="new-physicalContentId" placeholder="physicalContentId">
+    <button onclick="reserveFrontEnd()">Boek reserveren</button><br>
+    <div id="boekGereserveerd"></div>
+    
+    <!-- <input type="text" id="trainee_name" placeholder="trainee naam">
+   Welke boeken hebben we? 
+     <table>
+        <tr><th>Titel                     <th>aantal         <th>beschikbaarheid  <th>reserveren                                                  <th> status
+        <tr><td>Scrum for Dummies         <td id="a1">1      <td id="b1">Ja       <td><button onclick="reserveerBoek(this,1)">reserveren</button> <td><label id="gereserveerd1">.</label>
+        <tr><td>SQL Pocket Guide          <td id="a2">2      <td id="b2">Ja       <td><button onclick="reserveerBoek(this,2)">reserveren</button> <td><label id="gereserveerd2">.</label>
+        <tr><td>The Data Warehouse Toolkit<td id="a3">1      <td id="b3">Ja       <td><button onclick="reserveerBoek(this,3)">reserveren</button> <td><label id="gereserveerd3">.</label>
+        <tr><td>Babok                     <td id="a4">1      <td id="b4">Ja       <td><button onclick="reserveerBoek(this,4)">reserveren</button> <td><label id="gereserveerd4">.</label>
+     </table>
+    Welke boeken zijn er beschikbaar? 
+    Kan ik dit book reserveren? -->
+
+    <h1>Boek beschikbaarheid</h1>
+     <button onclick="showBooks()">show books</button>
+     <div id="TMTable"></div>
+
+     <h1>Test</h1>
+     <input type="text" id="new-id">
+     <button onclick="IdCheck()">Check Id</button><br>
+     <div id="IdName"></div>
+    
+</body>
+</html>
