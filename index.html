@@ -12,7 +12,7 @@
         // let amount = document.getElementById("new-amount").value
         // let available = document.getElementById("new-available").value
 
-        fetch("http://wt2407.azurewebsites.net/api/books/addBook/"+ title);
+        fetch("https://wt2407.azurewebsites.net/api/books/addBook/"+ title);
 
         console.log(title)
         // console.log(amount)
@@ -25,7 +25,7 @@
     // Need bs.findall() in booksEndpoint to get all the books.
         console.log("check1");           
         try{
-            const response = await fetch("http://wt2407.azurewebsites.net/api/books/showBooks");
+            const response = await fetch("https://wt2407.azurewebsites.net/api/books/showBooks");
             console.log(response);
             if(!response.ok){
                 throw new Error(`Response status: ${response.status}`);
@@ -49,7 +49,7 @@
         let userId = document.getElementById("new-userId").value
         let contentId = document.getElementById("new-contentId").value
         try{
-            await fetch("http://wt2407.azurewebsites.net/api/books/reserveFrontEnd/"+ userId + "/" + contentId);
+            await fetch("https://wt2407.azurewebsites.net/api/books/reserveFrontEnd/"+ userId + "/" + contentId);
             document.getElementById("boekGereserveerd").innerHTML = contentId + " gereserveerd door " + userId;
         }
         catch(error){
@@ -63,7 +63,7 @@
         let contentId_return = document.getElementById("new-contentId-return").value
 
         try{
-            await fetch("http://wt2407.azurewebsites.net/api/books/returnFrontEnd/"+ userId_return + "/" + contentId_return);
+            await fetch("https://wt2407.azurewebsites.net/api/books/returnFrontEnd/"+ userId_return + "/" + contentId_return);
             document.getElementById("boekTerugGebracht").innerHTML = contentId_return + " terug gebracht door " + userId_return;
         }
         catch(error){
@@ -74,7 +74,7 @@
     async function IdCheck(){
         let inputId = document.getElementById("new-id").value;          
         try{
-            const response = await fetch("http://wt2407.azurewebsites.net/api/books/showBooks");
+            const response = await fetch("https://wt2407.azurewebsites.net/api/books/showBooks");
             console.log(response);
             if(!response.ok){
                 throw new Error(`Response status: ${response.status}`);
