@@ -120,5 +120,5 @@ async function showTeachingMaterialsPerFormat(){
         document.getElementById("FormatTable").innerHTML = eindString;
     }
 }
-    
+
 
