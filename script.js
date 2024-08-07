@@ -7,49 +7,37 @@ async function getCredentials(){
     console.log(login_response);
 }
 
-async function checkCredentials(){
-    let un = document.getElementById("username").value
-    let pw = document.getElementById("password").value
-	console.log(un);
-	console.log(pw);
-    try{
-        //const login_response = await fetch("http://localhost:8082/Login2.html/" + username + "/" + password);
-        const response  = await fetch("http://localhost:8082/userdata");
-        if(!response.ok){
-            throw new Error(`Response status: ${response.status}`);
-        }
-        const json = await response.json();
-        console.log(json);
-        
-        for(var x = 0; x < json.length; x++){
-            console.log("found_password " + json[x].password);
-            console.log("found_username " + json[x].username);
-            //console.log("check" + json[x].password + " "+ ""+ "" +)
-            if(json[x].username == un){
-                if(json[x].password == pw){
-                    //Give acces to next page
-                    console.log("Username and Password correct: access granted.");
-                    localStorage.setItem("kukeleku","ingelogd");
-                    window.location = "admin_start.html";
-                    break;
-                }
-                else{
-                    //print "Wrong password, try again"
-                    console.log("Password incorrect: access denied, try again.");
-                    alert("Verkeerde wachtwoord!!!");
-                    break;
-                }
-            }    
-            else{
-                //print "This username does not exist"
-                console.log("Username does not exist: acces denied, try again.");
-            }
-        }
+async function checkCredentials() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const messageElement = document.createElement('div');
+    messageElement.id = 'message';
+    
+    // Remove previous message if it exists
+    const previousMessage = document.getElementById('message');
+    if (previousMessage) {
+        previousMessage.remove();
     }
-    catch(error){
-        console.error(error.message)
+    
+    if (!username || !password) {
+        messageElement.innerText = 'Please fill in both fields.';
+        document.querySelector('.login-box').appendChild(messageElement);
+        return;
+    }
+
+    try {
+        const response = await fetch(`https://wt2407.azurewebsites.net/login/${username}/${password}`, {
+            method: 'GET'
+        });
+        const result = await response.text();
+        messageElement.innerText = result;
+        document.querySelector('.login-box').appendChild(messageElement);
+    } catch {
+        messageElement.innerText = 'Error occurred during login.';
+        document.querySelector('.login-box').appendChild(messageElement);
     }
 }
+
 
 async function showTeachingMaterials(){         
     console.log("check1");           
