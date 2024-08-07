@@ -1,0 +1,64 @@
+#TMTable {
+    margin: 20px auto;
+    width: 90%;
+    border-collapse: collapse;
+    text-align: left;
+}
+  
+#TMTable table {
+    width: 100%;
+    border: 1px solid #ddd;
+}
+  
+#TMTable th, #TMTable td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+  
+#TMTable th {
+    background-color: #f2f2f2;
+}
+
+.available{
+    width: 10%;
+}
+  
+.status {
+    display:flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 500px 20px;
+    font-weight: bold;
+    color: white;
+    border-radius: 20px;
+}
+
+.status-true {
+    background-color: var(--wt-donker-groen);
+}
+
+.status-false {
+    background-color: red;
+}
+
+.status::after {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.status-true::after {
+    content: '✔';
+    background-color: var(--wt-donker-groen);
+    color: white;
+}
+
+.status-false::after {
+    content: '✘';
+    background-color: red;
+    color: white;
+}
