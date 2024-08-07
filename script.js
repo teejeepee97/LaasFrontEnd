@@ -109,4 +109,59 @@ async function showTeachingMaterialsPerFormat(){
     }
 }
 
+async function showBooks() {
+    console.log("check1");
+    try {
+        const response = await fetch("https://wt2407.azurewebsites.net/showBooks");
+        console.log(response);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        const json = await response.json();
+        console.log(json);
+        
+        let eindString = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>BookID</th>
+                        <th>Book Name</th>
+                        <th>Student</th>
+                        <th>Date Lent</th>
+                        <th>Book Wear</th>
+                        <th class="available">Available</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+        
+        for (let x = 0; x < json.length; x++) {
+            eindString += `
+                <tr>
+                    <td>${json[x].contentId}</td>
+                    <td>${json[x].contentName}</td>
+                    <td>${json[x].student}</td>
+                    <td>${json[x].dateLent}</td>
+                    <td>${json[x].physicalWear}</td>
+                    <td class="status ${getStatusClass(json[x].available)}">
+                        ${json[x].available ? 'Available' : 'Not Available'}
+                    </td>
+                </tr>
+            `;
+        }
+        
+        eindString += `
+                </tbody>
+            </table>
+        `;
+        
+        document.getElementById("TMTable").innerHTML = eindString;
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+function getStatusClass(available) {
+    return available ? 'status-true' : 'status-false';
+}
 

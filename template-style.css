@@ -92,6 +92,20 @@ main {
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
+.title{
+  margin-left: 5%;
+}
+
+.title-line {
+  display: flex;
+  text-align: center;
+  width: 90%; /* Line width is 75% of the container */
+  margin-left: 5%;
+  border: none; /* Remove default border */
+  height: 2px; /* Adjust the height of the line as needed */
+  background-color: var(--wt-licht-grijs); /* Line color */
+}
+
 footer {
   background-color: #fff;
   top: 0;
