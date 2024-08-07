@@ -7,19 +7,27 @@
   
 #TMTable table {
     width: 100%;
-    border: 1px solid #ddd;
+    border: 1px solid var(--wt-lichtst-grijs);
 }
   
 #TMTable th, #TMTable td {
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--wt-licht-grijs);
 }
   
 #TMTable th {
-    background-color: #f2f2f2;
+    background-color: var(--wt-lichtst-grijs);
 }
 
 .available{
+    width: 10%;
+}
+
+.Wear{
+    width: 10%;
+}
+
+.reserve{
     width: 10%;
 }
   
@@ -27,10 +35,9 @@
     display:flex;
     justify-content: space-between;
     position: relative;
-    padding: 500px 20px;
+    padding: 5px 20px;
     font-weight: bold;
     color: white;
-    border-radius: 20px;
 }
 
 .status-true {
@@ -44,9 +51,6 @@
 .status::after {
     content: '';
     display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
     margin-right: 10px;
     vertical-align: middle;
 }
@@ -61,4 +65,24 @@
     content: '✘';
     background-color: red;
     color: white;
+}
+
+.reserve-button {
+    font-size: 1.1rem;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    width: 100%;
+    background: var(--wt-grijs);
+    color: white;
+    cursor: pointer;
+}
+
+.reserve-button:hover {
+    background: #000;
+}
+
+.user-container{
+    margin: 0 5%;
+
 }

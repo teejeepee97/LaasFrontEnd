@@ -126,10 +126,9 @@ async function showBooks() {
                     <tr>
                         <th>BookID</th>
                         <th>Book Name</th>
-                        <th>Student</th>
-                        <th>Date Lent</th>
-                        <th>Book Wear</th>
+                        <th class="Wear">Book Wear</th>
                         <th class="available">Available</th>
+                        <th class ="reserve">Reserve</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -138,13 +137,15 @@ async function showBooks() {
         for (let x = 0; x < json.length; x++) {
             eindString += `
                 <tr>
+                <tr>
                     <td>${json[x].contentId}</td>
                     <td>${json[x].contentName}</td>
-                    <td>${json[x].student}</td>
-                    <td>${json[x].dateLent}</td>
                     <td>${json[x].physicalWear}</td>
                     <td class="status ${getStatusClass(json[x].available)}">
                         ${json[x].available ? 'Available' : 'Not Available'}
+                    </td>
+                    <td>
+                        <button class="reserve-button" onclick="reserveBook('${json[x].contentId}', this)">Reserve Book</button>
                     </td>
                 </tr>
             `;
@@ -165,3 +166,38 @@ function getStatusClass(available) {
     return available ? 'status-true' : 'status-false';
 }
 
+async function reserveBook(contentId, button) {
+    let userId = document.getElementById("new-userId").value;
+    
+    // Disable the button and change its style
+    button.disabled = true;
+    button.style.backgroundColor = 'red';
+    button.style.color = 'white'; // Optional: Change text color for better contrast
+    button.innerText = 'Reserving...'; // Optional: Change button text to indicate reservation process
+    
+    try {
+        await reserveFrontEnd(userId, contentId);
+        // Display an alert with the reservation message
+        alert(`book ${contentId} has been reserved by user ${userId}`);
+    } catch (error) {
+        console.log(error.message);
+    } finally {
+        // Re-enable the button after 5 seconds
+        setTimeout(() => {
+            button.disabled = false;
+            button.style.backgroundColor = ''; // Reset button color
+            button.style.color = ''; // Reset text color
+            button.innerText = 'Reserve Book'; // Reset button text
+        }, 5000);
+
+        showBooks();
+    }
+}
+
+async function reserveFrontEnd(userId, contentId) {
+    try {
+        await fetch(`https://wt2407.azurewebsites.net/reserveFrontEnd/${userId}/${contentId}`);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
