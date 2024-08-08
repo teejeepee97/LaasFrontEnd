@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Working Talent - Template</title>
-    <link rel="stylesheet" href="template-style.css" />
-    <link rel="stylesheet" href="style-login.css" />
-</head>
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Working Talent - Template</title>
+            <link rel="stylesheet" href="template-style.css" />
+            <link rel="stylesheet" href="style-books.css" />
+        </head>
 <body>
     <nav class="nav">
         <div class="container">
@@ -16,44 +16,28 @@
             </a>
           </h1>
           <ul>
+            <li><a href="books.html" class = "navigation-link">Library</a></li>
+            <!-- <li><a href="#" class = "navigation-link">Library</a></li>
+            <li><a href="#" class = "navigation-link">Feedback Database</a></li>
+            <li><a href="#" class = "navigation-link">Course Database</a></li>
+            <li><a href="#" class = "navigation-link">Learning Paths</a></li> -->
+            <li><a href="Login2.html" class="topright-button">Log in ></a></li>
           </ul>
         </div>
-      </nav>
-    <div class="container-login">
-        <div class="login-left">
-            <h1>Log In</h1>
-            <hr class="login-line">
+      </nav> 
 
+      <h1 class="title">Book Library Database</h1>
+      <hr class="title-line">
 
-            <div class="login-box" id="signIn">
-                <h1 class="form-title">Sign in</h1>
-                <form>
-
-                  <div class="input-group">
-                    <input type="text" id="username" placeholder="Enter your username">
-                    <label for="username">Username</label>
-                </div>
-                <div class="input-group">
-                    <input type="password" id="password" placeholder="Enter your password">
-                    <label for="password">Password</label>
-                </div>
-
-                    <!-- <div class="remember-forget">
-                        <label><input type="checkbox">Remember me</label>
-                        <a href="#">Forgot password?</a>
-                    </div> -->
-                    
-                </form>
-                <button onclick="checkCredentials()" type="submit" class="btn">Login</button>
-            </div>
-
-        </div>
-        <div class="login-right">
-            <img src="https://s3.eu-central-1.amazonaws.com/workingtalent-cms/media/_612x748_crop_center-center_100_none/203412/WT_Kantoor_selectie_Crops34.webp">
-        </div>
+    <div class="user-container">
+      <label for="new-userId">User ID:</label>
+      <input type="text" id="new-userId" />
+      <br>
     </div>
 
-    <footer>
+      <div id="TMTable"></div>
+
+      <footer>
         <p>&copy; 2024 Working Talent</p>
           <div class="social-media">
             <a href="https://www.facebook.com/workingtalent.nl/" target="_blank">
@@ -87,6 +71,7 @@
           </div>
       </footer>
 
-    <script src="script.js"></script>
+      <script src="script.js"></script>
+      <script>window.onload = showBooks;</script>
 </body>
 </html>

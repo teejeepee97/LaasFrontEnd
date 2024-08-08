@@ -1,103 +1,104 @@
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    font-family: "poppins", sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
-.container-login{
+.container-login {
     display: flex;
     flex-direction: row;
     overflow: hidden;
 }
 
 .login-line {
-    width: 600px;
+    width: 75%;
     padding: 1.5rem;
     margin: 0px auto;
     border: none;
     border-top: 2px solid var(--wt-licht-grijs);
-  }
-  
+}
 
-.login-left, .login-right{
+.login-left, .login-right {
     flex: 1;
     display: flex;
     flex-direction: column;
     width: 50vw;
 }
 
-.login-left{
+.login-left {
     display: flex;
     align-items: flex-start;
     text-align: left;
     min-width: 800px;
 }
 
-.login-left h1{
+.login-left h1 {
     padding-top: 5rem;
-    padding-left: 200px;
+    padding-left: 150px;
 }
 
-.login-box{
-    background:var(--wt-lichtst-grijs);
+.login-box {
+    background: var(--wt-lichtst-grijs);
     width: 600px;
     padding: 1.5rem;
     margin: 10px auto;
     border-radius: 10px;
 }
 
-.login-box h1{
+.login-box h1 {
     padding-top: 1rem;
     padding-left: 30px;
 }
 
-form{
-    margin: 0 4rem;
+form {
+    margin: 0;
     padding: 1.3rem;
 }
 
-.form-title{
+.form-title {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 0.4rem;
 }
 
-input{
-    color: inherit;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    border-color: var(--wt-licht-grijs);
-    border-radius: 50px;
-    font-size: inherit;
-    padding: .3rem;
+.input-group {
+    position: relative;
+    margin-bottom: 1rem;
 }
 
-.input-group i{
-    position: absolute;
-    color: black;
-}
-input:focus{
+input {
+    color: inherit;
+    width: 100%;
+    padding: 0.8rem 1rem;
     background-color: #fff;
-    outline: transparent;
+    border: 1px solid var(--wt-licht-grijs);
+    border-radius: 50px;
+    font-size: 1rem;
 }
-input::placeholder{
+
+input::placeholder {
     color: transparent;
 }
-label{
-    color: var(--wt-donker-grijs);
-    position: relative;
+
+label {
+    position: absolute;
     left: 1.2em;
-    top: -1.6em;
-    cursor:auto;
-    transition: 0.3s ease all;
-}
-input:focus~label, input:not(:placeholder-shown)~label{
-    left: -5em;
+    top: 0.8em;
     color: var(--wt-donker-grijs);
+    cursor: text;
+    transition: 0.2s ease all;
 }
-.btn{
+
+input:focus + label,
+input:not(:placeholder-shown) + label {
+    top: -1.2em;
+    left: 1em;
+    font-size: 0.8em;
+    color: var(--wt-grijs);
+}
+
+.btn {
     font-size: 1.1rem;
     padding: 8px 0;
     border-radius: 5px;
@@ -107,8 +108,9 @@ input:focus~label, input:not(:placeholder-shown)~label{
     background: var(--wt-donker-groen);
     color: white;
     cursor: pointer;
-    transition: 0.9s;
+    transition: 0.3s;
 }
-.btn:hover{
+
+.btn:hover {
     background: #000;
 }

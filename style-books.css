@@ -1,0 +1,88 @@
+#TMTable {
+    margin: 20px auto;
+    width: 90%;
+    border-collapse: collapse;
+    text-align: left;
+}
+  
+#TMTable table {
+    width: 100%;
+    border: 1px solid var(--wt-lichtst-grijs);
+}
+  
+#TMTable th, #TMTable td {
+    padding: 12px;
+    border: 1px solid var(--wt-licht-grijs);
+}
+  
+#TMTable th {
+    background-color: var(--wt-lichtst-grijs);
+}
+
+.available{
+    width: 10%;
+}
+
+.Wear{
+    width: 10%;
+}
+
+.reserve{
+    width: 10%;
+}
+  
+.status {
+    display:flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 5px 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.status-true {
+    background-color: var(--wt-donker-groen);
+}
+
+.status-false {
+    background-color: red;
+}
+
+.status::after {
+    content: '';
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.status-true::after {
+    content: '✔';
+    background-color: var(--wt-donker-groen);
+    color: white;
+}
+
+.status-false::after {
+    content: '✘';
+    background-color: red;
+    color: white;
+}
+
+.reserve-button {
+    font-size: 1.1rem;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    width: 100%;
+    background: var(--wt-grijs);
+    color: white;
+    cursor: pointer;
+}
+
+.reserve-button:hover {
+    background: #000;
+}
+
+.user-container{
+    margin: 0 5%;
+
+}
