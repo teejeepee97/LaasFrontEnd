@@ -32,6 +32,10 @@ async function checkCredentials() {
         const result = await response.text();
         messageElement.innerText = result;
         document.querySelector('.login-box').appendChild(messageElement);
+        if (result == "Login successful!"){
+            localStorage.setItem("mijnGeheim", "ingelogd")
+            window.location = "books.html";
+        }
     } catch {
         messageElement.innerText = 'Error occurred during login.';
         document.querySelector('.login-box').appendChild(messageElement);
