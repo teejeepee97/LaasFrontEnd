@@ -68,7 +68,7 @@ function logout() {
   localStorage.removeItem('loginTime');
 
   // Optionally redirect the user to the login page or refresh the current page
-  window.location.href = 'login2.html';
+  window.location.href = 'index.html';
 }
 
 // Function to update session time on user activity
