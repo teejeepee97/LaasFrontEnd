@@ -42,7 +42,7 @@ function updateNavigation() {
     } else {
       // If the user is not logged in, link to the login page
       topRightButton = `
-        <li><a href="login2.html" class="topright-button">Login</a></li>
+        <li><a href="Login2.html" class="topright-button">Login</a></li>
       `;
     }
 
