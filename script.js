@@ -158,7 +158,7 @@ async function reserveBook(contentId, button) {
 
 async function reserveFrontEnd(userId, contentId) {
     try {
-        await fetch(`https://wt2407.azurewebsites.net/reserveFrontEnd/${userId}/${contentId}`);
+        await fetch(`https://wt2407.azurewebsites.net/reserveBook/${userId}/${contentId}`);
     } catch (error) {
         console.log(error.message);
     }
