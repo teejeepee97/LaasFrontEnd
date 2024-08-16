@@ -1,0 +1,93 @@
+
+h1{
+  padding-top: 5px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 65pt;
+}
+
+h2{
+  padding-top: 30px;
+  text-align: center;
+  font-size: larger;
+  padding-left: 15%;
+}
+
+p{
+    text-align: center;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 25px;
+}
+
+.frontpage-button{
+    color: #000;
+    text-decoration: none;
+}
+.frontpage-button:visited{
+    color: #000;
+}
+
+.balk {
+    background-color: var(--wt-lichtst-grijs);
+    color: black;
+    padding: 0px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 35px;
+}
+
+.balk .title {
+    padding-top: 30px;
+    text-align: center;
+    font-size: larger;
+    padding-left: 25%;
+}
+
+.balk .text {
+    text-align: left;
+    padding-left: 15%;
+    padding-right: 20%;
+    padding-top: 25px
+}
+
+#office-photo{
+    max-width: 100%;
+    display: block;
+    padding-bottom: 25px;
+    padding-top: 200px;
+}
+
+.topright-button{
+  background-color: var(--wt-licht-groen);
+    padding: 1rem 2rem;
+    margin: 40px;
+    width: auto;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.frontpage-button{
+    background-color: var(--wt-licht-groen);
+      padding: 1rem 2rem;
+      margin: 10px;
+      border-radius: 7px;
+      font-weight: bold;
+      text-align: center;
+      font-size: xx-large;
+  }
+
+.frontpage-button:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    background-image: linear-gradient(to right, var(--wt-donker-groen) , var(--wt-licht-groen), var(--wt-licht-groen));
+    color: #000;
+    text-decoration: none;
+} 
+
+.topright-button:hover{
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  background-image: linear-gradient(to right, var(--wt-donker-groen) , var(--wt-licht-groen), var(--wt-licht-groen));
+}

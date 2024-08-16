@@ -1,44 +1,5 @@
 const teachingMaterialFormats = ["book","slidedeck","weblink","pdf_file","weblink","video","online_tutorial","webinar","udemy_course","reader"];
 
-async function getCredentials(){
-    let username = document.getElementById("username").value
-    let password = document.getElementById("password").value
-    const login_response = await fetch("http://localhost:8082/Login2.html/" + username + "/" + password);
-    console.log(login_response);
-}
-
-async function checkCredentials() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const messageElement = document.createElement('div');
-    messageElement.id = 'message';
-    
-    // Remove previous message if it exists
-    const previousMessage = document.getElementById('message');
-    if (previousMessage) {
-        previousMessage.remove();
-    }
-    
-    if (!username || !password) {
-        messageElement.innerText = 'Please fill in both fields.';
-        document.querySelector('.login-box').appendChild(messageElement);
-        return;
-    }
-
-    try {
-        const response = await fetch(`https://wt2407.azurewebsites.net/login/${username}/${password}`, {
-            method: 'GET'
-        });
-        const result = await response.text();
-        messageElement.innerText = result;
-        document.querySelector('.login-box').appendChild(messageElement);
-    } catch {
-        messageElement.innerText = 'Error occurred during login.';
-        document.querySelector('.login-box').appendChild(messageElement);
-    }
-}
-
-
 async function showTeachingMaterials(){         
     console.log("check1");           
     try{
@@ -167,7 +128,7 @@ function getStatusClass(available) {
 }
 
 async function reserveBook(contentId, button) {
-    let userId = document.getElementById("new-userId").value;
+    const userId = localStorage.getItem('userId');
     
     // Disable the button and change its style
     button.disabled = true;
@@ -202,3 +163,4 @@ async function reserveFrontEnd(userId, contentId) {
         console.log(error.message);
     }
 }
+

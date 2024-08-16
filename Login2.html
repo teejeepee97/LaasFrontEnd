@@ -6,25 +6,34 @@
     <title>Working Talent - Template</title>
     <link rel="stylesheet" href="template-style.css" />
     <link rel="stylesheet" href="style-login.css" />
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const rol = localStorage.getItem('rol');
+      
+        if (rol === 'Trainee') {
+            window.location = 'books.html';
+        } else if (rol === 'Trainer') {
+            window.location = 'trainer.html';
+      }});
+      </script>
 </head>
 <body>
-    <nav class="nav">
-        <div class="container">
-          <h1 class="logo">
-            <a href="index.html">
-              <img src="images/logo.png" alt="Working Talent" />
-            </a>
-          </h1>
-          <ul>
-          </ul>
-        </div>
-      </nav>
+  <nav class="nav">
+    <div class="container">
+      <h1 class="logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="Working Talent" />
+        </a>
+      </h1>
+      <ul id="nav-links">
+        <!-- List items are populated in JS -->
+      </ul>
+    </div>
+  </nav>
     <div class="container-login">
         <div class="login-left">
             <h1>Log In</h1>
             <hr class="login-line">
-
-
             <div class="login-box" id="signIn">
                 <h1 class="form-title">Sign in</h1>
                 <form>
@@ -88,5 +97,7 @@
       </footer>
 
     <script src="script.js"></script>
+    <!-- <script src="sessionNavigation.js"></script> -->
+    <script src="login.js"></script>
 </body>
 </html>

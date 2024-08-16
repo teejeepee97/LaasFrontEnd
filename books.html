@@ -6,34 +6,32 @@
             <title>Working Talent - Template</title>
             <link rel="stylesheet" href="template-style.css" />
             <link rel="stylesheet" href="style-books.css" />
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                const username = localStorage.getItem('username');
+              
+                if (!username) {
+                  window.location.href = 'index.html';
+                }
+              });
+              </script>
         </head>
 <body>
-    <nav class="nav">
-        <div class="container">
-          <h1 class="logo">
-            <a href="index.html">
-              <img src="images/logo.png" alt="Working Talent" />
-            </a>
-          </h1>
-          <ul>
-            <li><a href="books.html" class = "navigation-link">Library</a></li>
-            <!-- <li><a href="#" class = "navigation-link">Library</a></li>
-            <li><a href="#" class = "navigation-link">Feedback Database</a></li>
-            <li><a href="#" class = "navigation-link">Course Database</a></li>
-            <li><a href="#" class = "navigation-link">Learning Paths</a></li> -->
-            <li><a href="Login2.html" class="topright-button">Log in ></a></li>
-          </ul>
-        </div>
-      </nav> 
+  <nav class="nav">
+    <div class="container">
+      <h1 class="logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="Working Talent" />
+        </a>
+      </h1>
+      <ul id="nav-links">
+        <!-- List items are populated in JS -->
+      </ul>
+    </div>
+  </nav>
 
       <h1 class="title">Book Library Database</h1>
       <hr class="title-line">
-
-    <div class="user-container">
-      <label for="new-userId">User ID:</label>
-      <input type="text" id="new-userId" />
-      <br>
-    </div>
 
       <div id="TMTable"></div>
 
@@ -72,6 +70,9 @@
       </footer>
 
       <script src="script.js"></script>
-      <script>window.onload = showBooks;</script>
+      <script src="sessionNavigation.js"></script>
+      <script>
+      document.addEventListener('DOMContentLoaded', showBooks);
+      </script>
 </body>
 </html>
