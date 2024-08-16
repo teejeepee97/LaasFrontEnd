@@ -135,6 +135,7 @@ async function reserveBook(contentId, button) {
     button.style.backgroundColor = 'red';
     button.style.color = 'white'; // Optional: Change text color for better contrast
     button.innerText = 'Reserving...'; // Optional: Change button text to indicate reservation process
+                                       // Get innerText value from enum value of the reservation
     
     try {
         await reserveFrontEnd(userId, contentId);
