@@ -33,7 +33,7 @@ async function reserveBook(contentId, button) {
 
 async function reserveFrontEnd(userId, contentId) {
     try {
-        await fetch(`https://wt2407.azurewebsites.net/reserveFrontEnd/${userId}/${contentId}`);
+        await fetch(`https://wt2407v2.azurewebsites.net/reserveFrontEnd/${userId}/${contentId}`);
     } catch (error) {
         console.log(error.message);
     }
@@ -42,7 +42,7 @@ async function reserveFrontEnd(userId, contentId) {
 async function showBooks() {
     console.log("check1");
     try {
-        const response = await fetch("https://wt2407.azurewebsites.net/showBooks");
+        const response = await fetch("https://wt2407v2.azurewebsites.net/showBooks");
         console.log(response);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -98,7 +98,7 @@ async function showBooks() {
 
 async function returnBook(reservationId){
     
-    const response = await fetch(`https://wt2407.azurewebsites.net/returnBook/${reservationId}`);
+    const response = await fetch(`https://wt2407v2.azurewebsites.net/returnBook/${reservationId}`);
     console.log(response);
     if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
@@ -119,7 +119,7 @@ async function showBooksByReservationsStatus(status){
     
     let userId = document.getElementById("userId").innerHTML;
     try {
-        const response = await fetch(`https://wt2407.azurewebsites.nets/${statusText}`);
+        const response = await fetch(`https://wt2407v2.azurewebsites.net/${statusText}`);
         console.log(response);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
