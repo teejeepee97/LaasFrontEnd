@@ -25,7 +25,7 @@ async function checkCredentials() {
     }
 
     try {
-        const response = await fetch(`http://localhost:8082/login/${username}/${password}`, {
+        const response = await fetch(`https://wt2407v2.azurewebsites.net/login/${username}/${password}`, {
             method: 'GET'
         });
         // const response = await fetch(`http://localhost:8082/login/${username}/${password}`, {
