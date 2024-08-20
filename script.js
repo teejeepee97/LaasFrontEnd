@@ -73,7 +73,7 @@ async function showTeachingMaterialsPerFormat(){
 async function showBooks() {
     console.log("check1");
     try {
-        const response = await fetch("https://wt2407.azurewebsites.net/showBooks");
+        const response = await fetch("https://wt2407v2.azurewebsites.net/showBooks");
         console.log(response);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -158,7 +158,7 @@ async function reserveBook(contentId, button) {
 
 async function reserveFrontEnd(userId, contentId) {
     try {
-        await fetch(`https://wt2407.azurewebsites.net/reserveBook/${userId}/${contentId}`);
+        await fetch(`https://wt2407v2.azurewebsites.net/reserveBook/${userId}/${contentId}`);
     } catch (error) {
         console.log(error.message);
     }
