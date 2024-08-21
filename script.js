@@ -129,7 +129,7 @@ function getStatusClass(available) {
 }
 
 async function reserveBook(contentId, button) {
-    const userId = localStorage.getItem('userId');
+    const username = localStorage.getItem('username');
     
     // Disable the button and change its style
     button.disabled = true;
@@ -139,9 +139,9 @@ async function reserveBook(contentId, button) {
                                        // Get innerText value from enum value of the reservation
     
     try {
-        await reserveFrontEnd(userId, contentId);
+        await reserveFrontEnd(username, contentId);
         // Display an alert with the reservation message
-        alert(`book ${contentId} has been reserved by user ${userId}`);
+        alert(`book ${contentId} has been reserved by user ${username}`);
     } catch (error) {
         console.log(error.message);
     } finally {
@@ -157,10 +157,9 @@ async function reserveBook(contentId, button) {
     }
 }
 
-async function reserveFrontEnd(userId, contentId) {
+async function reserveFrontEnd(username, contentId) {
     try {
-        // await fetch(`http://localhost:8082/reserveBook/${userId}/${contentId}`);
-        await fetch(`https://wt2407v2.azurewebsites.net/reserveBook/${userId}/${contentId}`);
+        await fetch(`https://wt2407v2.azurewebsites.net/reserveBook/${username}/${contentId}`);
     } catch (error) {
         console.log(error.message);
     }
