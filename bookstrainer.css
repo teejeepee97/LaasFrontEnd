@@ -1,0 +1,142 @@
+#TMTable {
+  margin: 20px auto;
+  width: 90%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+#TMTable table {
+  width: 100%;
+  border: 1px solid var(--wt-lichtst-grijs);
+}
+
+#TMTable th,
+#TMTable td {
+  padding: 12px;
+  border: 1px solid var(--wt-licht-grijs);
+}
+
+#TMTable th {
+  background-color: var(--wt-lichtst-grijs);
+}
+
+.available {
+  width: 10%;
+}
+
+.Wear {
+  width: 10%;
+}
+
+.reserve {
+  width: 10%;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 5px 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.status-true {
+  background-color: var(--wt-donker-groen);
+}
+
+.status-false {
+  background-color: red;
+}
+
+.status::after {
+  content: "";
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.status-true::after {
+  content: "✔";
+  background-color: var(--wt-donker-groen);
+  color: white;
+}
+
+.status-false::after {
+  content: "✘";
+  background-color: red;
+  color: white;
+}
+
+.reserve-button {
+  font-size: 1.1rem;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  width: 100%;
+  background: var(--wt-grijs);
+  color: white;
+  cursor: pointer;
+}
+
+.reserve-button:hover {
+  background: #000;
+}
+
+.user-container {
+  margin: 0 5%;
+}
+
+.table-sortable thead tr {
+  background-color: black;
+  color: white;
+  border-spacing: 0;
+  cursor: pointer;
+  text-align: center;
+}
+.table-sortable {
+  border-spacing: 0;
+  border-top: 0;
+  padding: 10px 0 30px;
+  width: 90%; /* Line width is 75% of the container */
+  margin-left: 5%;
+}
+
+.table-sortable td {
+  cursor: pointer;
+  text-align: center;
+  padding: 15px;
+}
+.table-sortable .th-sort-asc::after {
+  content: "\25b4";
+}
+
+.table-sortable .th-sort-desc::after {
+  content: "\25be";
+}
+
+.table-sortable .th-sort-asc::after,
+.table-sortable .th-sort-desc::after {
+  margin-left: 5px;
+}
+
+.table-sortable .th-sort-asc,
+.table-sortable .th-sort-desc {
+  background: rgba(255, 255, 255, 0.2);
+}
+/* Cell color classes */
+/* Cell color classes for Physical Wear */
+.good {
+  background-color: #d4edda; /* Light green for GOOD */
+  color: #155724; /* Dark green text for contrast */
+}
+
+.medium {
+  background-color: #fff3cd; /* Light yellow for MEDIUM */
+  color: #856404; /* Dark yellow text for contrast */
+}
+
+.bad {
+  background-color: #f8d7da; /* Light red for BAD */
+  color: #721c24; /* Dark red text for contrast */
+}

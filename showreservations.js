@@ -182,7 +182,7 @@ async function showBooks() {
     console.log(json);
 
     let eindString = `
-              <table class="table-sortable">
+              <table class="table table-sortable">
                   <thead>
                       <tr>
                           <th>BookID</th>
