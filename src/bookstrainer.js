@@ -3,16 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
   showReservations();
 
   // Set up event listener for table sorting
-  document.querySelectorAll(".table-sortable th").forEach((headerCell, index) => {
-    headerCell.setAttribute("data-column", index);
-    headerCell.addEventListener("click", () => {
-      const tableElement = headerCell.closest("table"); // Get the closest table element
-      const headerIndex = parseInt(headerCell.getAttribute("data-column"), 10);
-      const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+  document
+    .querySelectorAll(".table-sortable th")
+    .forEach((headerCell, index) => {
+      headerCell.setAttribute("data-column", index);
+      headerCell.addEventListener("click", () => {
+        const tableElement = headerCell.closest("table"); // Get the closest table element
+        const headerIndex = parseInt(
+          headerCell.getAttribute("data-column"),
+          10
+        );
+        const currentIsAscending = headerCell.classList.contains("th-sort-asc");
 
-      sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+        sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+      });
     });
-  });
 });
 
 async function showReservations() {
@@ -64,16 +69,22 @@ async function showReservations() {
     recolorCells();
 
     // Reattach the sorting functionality after the table is rendered
-    document.querySelectorAll(".table-sortable th").forEach((headerCell, index) => {
-      headerCell.setAttribute("data-column", index);
-      headerCell.addEventListener("click", () => {
-        const tableElement = headerCell.closest("table");
-        const headerIndex = parseInt(headerCell.getAttribute("data-column"), 10);
-        const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+    document
+      .querySelectorAll(".table-sortable th")
+      .forEach((headerCell, index) => {
+        headerCell.setAttribute("data-column", index);
+        headerCell.addEventListener("click", () => {
+          const tableElement = headerCell.closest("table");
+          const headerIndex = parseInt(
+            headerCell.getAttribute("data-column"),
+            10
+          );
+          const currentIsAscending =
+            headerCell.classList.contains("th-sort-asc");
 
-        sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+          sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+        });
       });
-    });
   } catch (error) {
     console.error("Error fetching reservations:", error);
   }
@@ -107,14 +118,18 @@ function recolorCells() {
 }
 
 function sortTableByColumn(table, column, asc = true) {
-  console.log(table)
+  console.log(table);
   const dirModifier = asc ? 1 : -1;
   const tBody = table.querySelector("tbody");
   const rows = Array.from(tBody.querySelectorAll("tr"));
 
   const sortedRows = rows.sort((a, b) => {
-    const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-    const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+    const aColText = a
+      .querySelector(`td:nth-child(${column + 1})`)
+      .textContent.trim();
+    const bColText = b
+      .querySelector(`td:nth-child(${column + 1})`)
+      .textContent.trim();
 
     // Determine if column is numeric or text
     const aIsNumeric = !isNaN(parseFloat(aColText)) && isFinite(aColText);
@@ -136,7 +151,52 @@ function sortTableByColumn(table, column, asc = true) {
   tBody.append(...sortedRows);
 
   // Remember how the column is currently sorted
-  table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
-  table.querySelector(`th[data-column="${column}"]`).classList.toggle("th-sort-asc", asc);
-  table.querySelector(`th[data-column="${column}"]`).classList.toggle("th-sort-desc", !asc);
+  table
+    .querySelectorAll("th")
+    .forEach((th) => th.classList.remove("th-sort-asc", "th-sort-desc"));
+  table
+    .querySelector(`th[data-column="${column}"]`)
+    .classList.toggle("th-sort-asc", asc);
+  table
+    .querySelector(`th[data-column="${column}"]`)
+    .classList.toggle("th-sort-desc", !asc);
+}
+
+function recolorCells() {
+  const table = document.querySelector("#reservationsTable .table");
+  if (!table) return;
+
+  const rows = table.querySelectorAll("tbody tr");
+
+  rows.forEach((row) => {
+    // Physical Wear Column (5th column)
+    const physicalWearCell = row.cells[4];
+    const physicalWearText = physicalWearCell.textContent.trim().toUpperCase();
+
+    // Clear existing classes and apply new ones
+    physicalWearCell.classList.remove("bubble", "good", "medium", "bad");
+
+    if (physicalWearText === "GOOD") {
+      physicalWearCell.classList.add("bubble", "good");
+    } else if (physicalWearText === "MEDIUM") {
+      physicalWearCell.classList.add("bubble", "medium");
+    } else if (physicalWearText === "BAD") {
+      physicalWearCell.classList.add("bubble", "bad");
+    }
+
+    // Reservation Status Column (6th column)
+    const statusCell = row.cells[5];
+    const statusText = statusCell.textContent.trim().toUpperCase();
+
+    // Clear existing classes and apply new ones
+    statusCell.classList.remove("bubble", "in_afwachting", "uitgeleend");
+
+    if (statusText === "IN_AFWACHTING") {
+      statusCell.classList.add("bubble", "inafwachting");
+    } else if (statusText === "UITGELEEND") {
+      statusCell.classList.add("bubble", "uitgeleend");
+    } else if (statusText === "TERUG_GEBRACHT") {
+      statusCell.classList.add("bubble", "teruggebracht");
+    }
+  });
 }
