@@ -182,9 +182,9 @@ async function reserveBook(contentId, button) {
                                        // Get innerText value from enum value of the reservation
     
     try {
-        await reserveFrontEnd(username, contentId);
+        let response = await reserveFrontEnd(username, contentId);
         // Display an alert with the reservation message
-        alert(`book ${contentId} has been reserved by user ${username}`);
+        alert(response);
     } catch (error) {
         console.log(error.message);
     } finally {
@@ -202,8 +202,10 @@ async function reserveBook(contentId, button) {
 
 async function reserveFrontEnd(username, contentId) {
     try {
-        // await fetch(`http://localhost:8082/reserveBook/${username}/${contentId}`);
-        await fetch(`https://wt2407v2.azurewebsites.net/reserveBook/${username}/${contentId}`);
+        let response  = await fetch(`https://wt2407v2.azurewebsites.net/reserveBook/${username}/${contentId}`);
+        let response_text = response.text()
+        console.log(response_text);
+        return response_text
     } catch (error) {
         console.log(error.message);
     }

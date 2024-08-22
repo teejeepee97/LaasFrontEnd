@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function showReservations() {
   console.log("Fetching reservations...");
   try {
-    const response = await fetch("http://azurewebsites:8082/showReservations");
+    const response = await fetch("https://wt2407v2.azurewebsites.net/showReservations");
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
