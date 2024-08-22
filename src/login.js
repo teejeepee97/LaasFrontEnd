@@ -38,7 +38,7 @@ async function checkCredentials() {
     const result = await response.json();
 
     if (result === null || result === undefined) {
-      messageElement.innerText = "Error occurred during login.";
+      messageElement.innerText = "Invalid Credentials";
       document.querySelector(".login-box").appendChild(messageElement);
       return;
     }
@@ -64,7 +64,7 @@ async function checkCredentials() {
     // messageElement.innerText = rol;
     // document.querySelector('.login-box').appendChild(messageElement);
   } catch {
-    messageElement.innerText = "Error occurred during login.";
+    messageElement.innerText = "Invalid Credentials";
     document.querySelector(".login-box").appendChild(messageElement);
   }
 }

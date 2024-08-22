@@ -209,6 +209,49 @@ async function reserveFrontEnd(username, contentId) {
     }
 }
 
+
+
+
+
+
+
+function sortTableByColumn(table, column, asc = true) {
+  const dirModifier = asc ? 1 : -1;
+  const tBody = table.querySelector("tbody");
+  const rows = Array.from(tBody.querySelectorAll("tr"));
+
+  const sortedRows = rows.sort((a, b) => {
+    const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+    const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+
+    // Determine if column is numeric or text
+    const aIsNumeric = !isNaN(parseFloat(aColText)) && isFinite(aColText);
+    const bIsNumeric = !isNaN(parseFloat(bColText)) && isFinite(bColText);
+
+    console.log(aIsNumeric)
+    console.log(bIsNumeric)
+
+    if (aIsNumeric && bIsNumeric) {
+      return (parseFloat(aColText) - parseFloat(bColText)) * dirModifier;
+    } else {
+      return aColText.localeCompare(bColText) * dirModifier;
+    }
+  });
+
+  // Remove all existing TRs from the table
+  while (tBody.firstChild) {
+    tBody.removeChild(tBody.firstChild);
+  }
+
+  // Re-add the newly sorted rows
+  tBody.append(...sortedRows);
+
+  // Remember how the column is currently sorted
+  table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+  table.querySelector(`th[data-column="${column}"]`).classList.toggle("th-sort-asc", asc);
+  table.querySelector(`th[data-column="${column}"]`).classList.toggle("th-sort-desc", !asc);
+}
+
 function openTraineePopup(buttonElement, event) {
     const username = localStorage.getItem('username')
     // Check if the event object is received
