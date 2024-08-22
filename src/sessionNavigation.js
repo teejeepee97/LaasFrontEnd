@@ -21,7 +21,7 @@ function updateNavigation() {
     roleSpecificItems = `
       <li><a href="bookstrainer.html" class="navigation-link">Reservations</a></li>
         <li><a href="#" class="navigation-link">All Students</a></li>
-        <li><a href="#" class="navigation-link">Library</a></li>
+        <li><a href="books.html" class="navigation-link">Library</a></li>
         <li><a href="#" class="navigation-link">Feedback Database</a></li>
         <li><a href="#" class="navigation-link">Course Database</a></li>
         <li><a href="#" class="navigation-link">Learning Paths</a></li>

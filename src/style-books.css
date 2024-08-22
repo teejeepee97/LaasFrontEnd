@@ -85,3 +85,71 @@
 .user-container{
     margin: 0 5%;
 }
+/* Popup container styling */
+.popup {
+    display: none;
+    position: absolute;
+    width: 250px; /* Adjust width as needed */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* Remove bullets from the list */
+#traineeList {
+    list-style-type: none;
+    padding-left: 0; /* Remove left padding to align the text properly */
+}
+
+/* Style for the "Reserve for Self" option */
+.reserve-self a {
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: inline-block;
+    border: solid var(--wt-grijs);
+}
+
+/* Style for selected "Reserve for Self" option */
+.reserve-self.selected a {
+    background-color: #d0e0ff; /* Highlight color for selected item */
+    color: #0056b3; /* Text color for selected item */
+}
+
+/* General styling for other trainee options */
+#traineeList li a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px;
+    display: block;
+}
+
+/* Hover effect for other trainee options */
+#traineeList li a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Highlight for selected item */
+#traineeList li a.selected {
+    background-color: #d0e0ff; /* Highlight color for selected item */
+    color: #0056b3; /* Text color for selected item */
+}
+
+/* Popup close button styling */
+.popup button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+/* Hover effect for the close button */
+.popup button:hover {
+    background-color: #e0e0e0;
+}
