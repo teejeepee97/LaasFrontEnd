@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function showReservations() {
   console.log("Fetching reservations...");
   try {
-    const response = await fetch("http://localhost:8082/showReservations");
+    const response = await fetch("http://localhost:8082/showReservations/");
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
@@ -43,7 +43,7 @@ async function showReservations() {
     for (let item of json) {
       tableHTML += `
         <tr>
-          <td>${item.trainee.name}</td>
+          <td>${item.userName}</td>
           <td>${item.book.contentName}</td>
           <td>${item.reservationDate}</td>
           <td class="physical-wear">${item.book.physicalWear}</td>
