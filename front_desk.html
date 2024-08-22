@@ -1,31 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Front desk functies</title>
-    <script src="src.front_desk.js"></script>
-  </head>
-  <body>
-    <script>
-      window.onload = showBooks;
-    </script>
-    <input type="text" name="userIdInput" id="userId" />
-    <select
-      id="status"
-      name="status"
-      onchange="showBooksByReservationsStatus(this)"
-    >
-      <option value="1">UITGELEEND</option>
-      <option value="2">IN_AFWACHTING</option>
-      <option value="3">TERUG_GEBRACHT</option>
+    <script src="front_desk.js"></script>
+</head>
+<body>
+    <script>window.onload = showBooks;</script>
+    <input type="text" name="userIdInput" id="userId">
+    <select id="status" name="status" onchange="showBooksByReservationsStatus(this)">
+        <option value="1" >UITGELEEND</option>
+        <option value="2">IN_AFWACHTING</option>
+        <option value="3">TERUG_GEBRACHT</option>
     </select>
     <button onclick="showBooks()">showBooks test</button>
-    <button
-      onclick="showBooksByReservationsStatus(document.getElementById('status').innerHTML)"
-    >
-      Show books by reservation status
-    </button>
+    <button onclick="showBooksByReservationsStatus(document.getElementById('status').innerHTML)">Show books by reservation status</button>
     <div id="TMTable">tabel</div>
-  </body>
+</body>
 </html>
