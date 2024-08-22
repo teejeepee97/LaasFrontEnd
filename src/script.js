@@ -333,7 +333,7 @@ function selectTrainee(traineeName) {
     if (selectedItem) selectedItem.classList.add('selected');
 }
 
-function confirmSelection() {
+async function confirmSelection() {
     if (!selectedTrainee) {
         alert('Please select a trainee before confirming.');
         return;
@@ -342,7 +342,13 @@ function confirmSelection() {
     console.log('Selected trainee:', selectedTrainee, 'for contentId:', currentContentId);
 
     // Call your custom function with both the trainee name and contentId
-    reserveFrontEnd(selectedTrainee, currentContentId);
+    try{
+        let response = await reserveFrontEnd(selectedTrainee, currentContentId);
+
+        alert(response);
+    } catch (error) {
+        console.log(error.message); 
+    }
 
     // Close the popup
     closePopup();
