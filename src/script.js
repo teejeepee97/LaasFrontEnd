@@ -306,6 +306,8 @@ function confirmSelection() {
 function closePopup() {
     document.getElementById('traineePopup').style.display = 'none';
     selectedTrainee = null;
+
+    showBooks();
 }
 
 function sortTableByColumn(table, column, asc = true) {
