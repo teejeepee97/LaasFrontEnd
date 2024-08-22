@@ -7,8 +7,6 @@ function updateNavigation() {
   // Clear the existing links
   navLinks.innerHTML = "";
 
-  let Thijsknop = `<li><a href="frontdesk.html" class="navigation-link">Frontdesk</a></li>`;
-
   let roleSpecificItems = "";
 
   // Set the role-specific navigation items
@@ -48,7 +46,7 @@ function updateNavigation() {
   }
 
   // Update the nav with combined items
-  navLinks.innerHTML = Thijsknop + roleSpecificItems + topRightButton;
+  navLinks.innerHTML = roleSpecificItems + topRightButton;
 
   // If logged in, add an event listener for the logout button
   if (username) {
