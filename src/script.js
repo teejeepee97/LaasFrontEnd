@@ -59,7 +59,7 @@ async function showTeachingMaterialsPerFormat() {
   document.getElementById("formatCheck").innerHTML = "";
   let materialFormat = document.getElementById("materialFormat").value;
 
-  //const formatJson = await formatResponse.json();
+  const formatJson = await formatResponse.json();
 
   // for(var x = 0; x < teachingMaterialFormats.length; x++){
   //     //console.log(teachingMaterialFormats[x]);
@@ -73,6 +73,8 @@ async function showTeachingMaterialsPerFormat() {
   //             y = 1;
   //         }
   //     }
+
+
   if (!teachingMaterialFormats.includes(materialFormat)) {
     document.getElementById("formatCheck").innerHTML =
       materialFormat + " niet aanwezig in de lesmateriaal formatlijst.";
@@ -170,11 +172,7 @@ async function showBooks() {
 async function showBooks() {
   console.log("check1");
   try {
-    // const response = await fetch(
-    //   "https://wt2407v2.azurewebsites.net/showBooks"
-    // );
     const response = await fetch("http://localhost:8082/showBooks");
-    console.log(response);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
@@ -182,48 +180,58 @@ async function showBooks() {
     console.log(json);
 
     let eindString = `
-              <table class="table-sortable">
-                  <thead>
-                      <tr>
-                          <th>BookID</th>
-                          <th>Book Name</th>
-                          <th class="Wear">Book Wear</th>
-                          <th class="available">Available</th>
-                          <th class ="reserve">Reserve</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-          `;
+      <table id="booksTable" class="table-sortable">
+        <thead>
+          <tr>
+            <th data-column="0">BookID</th>
+            <th data-column="1">Book Name</th>
+            <th class="Wear" data-column="2">Book Wear</th>
+            <th class="available" data-column="3">Available</th>
+            <th class="reserve" data-column="4">Reserve</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
 
     for (let x = 0; x < json.length; x++) {
       eindString += `
-                  <tr>
-                  <tr>
-                      <td>${json[x].contentId}</td>
-                      <td>${json[x].contentName}</td>
-                      <td>${json[x].physicalWear}</td>
-                      <td class="status ${getStatusClass(json[x].available)}">
-                          ${json[x].available ? "Available" : "Not Available"}
-                      </td>
-                      <td>
-                          <button class="reserve-button" onclick="reserveBook('${
-                            json[x].contentId
-                          }', this)">Reserve Book</button>
-                      </td>
-                  </tr>
-              `;
+        <tr>
+          <td>${json[x].contentId}</td>
+          <td>${json[x].contentName}</td>
+          <td>${json[x].physicalWear}</td>
+          <td class="status ${getStatusClass(json[x].available)}">
+            ${json[x].available ? "Available" : "Not Available"}
+          </td>
+          <td>
+            <button class="reserve-button" onclick="reserveBook('${json[x].contentId}', this)">Reserve Book</button>
+          </td>
+        </tr>
+      `;
     }
 
     eindString += `
-                  </tbody>
-              </table>
-          `;
+        </tbody>
+      </table>
+    `;
 
     document.getElementById("TMTable").innerHTML = eindString;
+
+    // Add event listeners to table headers for sorting
+    const table = document.getElementById("booksTable");
+    const headers = table.querySelectorAll("th");
+    headers.forEach(header => {
+      header.addEventListener("click", () => {
+        const column = parseInt(header.getAttribute("data-column"));
+        const isAsc = !header.classList.contains("th-sort-asc");
+        sortTableByColumn(table, column, isAsc);
+      });
+    });
+
   } catch (error) {
     console.error(error.message);
   }
 }
+
 
 function getStatusClass(available) {
   return available ? "status-true" : "status-false";
@@ -267,4 +275,47 @@ async function reserveFrontEnd(userId, contentId) {
   } catch (error) {
     console.log(error.message);
   }
+}
+
+
+
+
+
+
+
+function sortTableByColumn(table, column, asc = true) {
+  const dirModifier = asc ? 1 : -1;
+  const tBody = table.querySelector("tbody");
+  const rows = Array.from(tBody.querySelectorAll("tr"));
+
+  const sortedRows = rows.sort((a, b) => {
+    const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+    const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+
+    // Determine if column is numeric or text
+    const aIsNumeric = !isNaN(parseFloat(aColText)) && isFinite(aColText);
+    const bIsNumeric = !isNaN(parseFloat(bColText)) && isFinite(bColText);
+
+    console.log(aIsNumeric)
+    console.log(bIsNumeric)
+
+    if (aIsNumeric && bIsNumeric) {
+      return (parseFloat(aColText) - parseFloat(bColText)) * dirModifier;
+    } else {
+      return aColText.localeCompare(bColText) * dirModifier;
+    }
+  });
+
+  // Remove all existing TRs from the table
+  while (tBody.firstChild) {
+    tBody.removeChild(tBody.firstChild);
+  }
+
+  // Re-add the newly sorted rows
+  tBody.append(...sortedRows);
+
+  // Remember how the column is currently sorted
+  table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+  table.querySelector(`th[data-column="${column}"]`).classList.toggle("th-sort-asc", asc);
+  table.querySelector(`th[data-column="${column}"]`).classList.toggle("th-sort-desc", !asc);
 }

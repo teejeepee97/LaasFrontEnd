@@ -3,13 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   showReservations();
 
   // Set up event listener for table sorting
-  document.querySelectorAll(".table-sortable th").forEach((headerCell) => {
+  document.querySelectorAll(".table-sortable th").forEach((headerCell, index) => {
+    headerCell.setAttribute("data-column", index);
     headerCell.addEventListener("click", () => {
       const tableElement = headerCell.closest("table"); // Get the closest table element
-      const headerIndex = Array.prototype.indexOf.call(
-        headerCell.parentElement.children,
-        headerCell
-      );
+      const headerIndex = parseInt(headerCell.getAttribute("data-column"), 10);
       const currentIsAscending = headerCell.classList.contains("th-sort-asc");
 
       sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
@@ -66,13 +64,11 @@ async function showReservations() {
     recolorCells();
 
     // Reattach the sorting functionality after the table is rendered
-    document.querySelectorAll(".table-sortable th").forEach((headerCell) => {
+    document.querySelectorAll(".table-sortable th").forEach((headerCell, index) => {
+      headerCell.setAttribute("data-column", index);
       headerCell.addEventListener("click", () => {
         const tableElement = headerCell.closest("table");
-        const headerIndex = Array.prototype.indexOf.call(
-          headerCell.parentElement.children,
-          headerCell
-        );
+        const headerIndex = parseInt(headerCell.getAttribute("data-column"), 10);
         const currentIsAscending = headerCell.classList.contains("th-sort-asc");
 
         sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
@@ -110,33 +106,19 @@ function recolorCells() {
   });
 }
 
-// Updated sortTableByColumn function
 function sortTableByColumn(table, column, asc = true) {
+  console.log(table)
   const dirModifier = asc ? 1 : -1;
   const tBody = table.querySelector("tbody");
   const rows = Array.from(tBody.querySelectorAll("tr"));
 
   const sortedRows = rows.sort((a, b) => {
-    const aColText = a
-      .querySelector(`td:nth-child(${column + 1})`)
-      .textContent.trim();
-    const bColText = b
-      .querySelector(`td:nth-child(${column + 1})`)
-      .textContent.trim();
+    const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+    const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
 
     // Determine if column is numeric or text
     const aIsNumeric = !isNaN(parseFloat(aColText)) && isFinite(aColText);
     const bIsNumeric = !isNaN(parseFloat(bColText)) && isFinite(bColText);
-
-    if (column === 2) {
-      // Assuming Content ID is the third column (index 2)
-      console.log(`Content ID value: ${aColText}, Type: ${typeof aColText}`);
-      console.log(
-        `Content ID value (parsed): ${parseFloat(
-          aColText
-        )}, Type: ${typeof parseFloat(aColText)}`
-      );
-    }
 
     if (aIsNumeric && bIsNumeric) {
       return (parseFloat(aColText) - parseFloat(bColText)) * dirModifier;
@@ -154,13 +136,7 @@ function sortTableByColumn(table, column, asc = true) {
   tBody.append(...sortedRows);
 
   // Remember how the column is currently sorted
-  table
-    .querySelectorAll("th")
-    .forEach((th) => th.classList.remove("th-sort-asc", "th-sort-desc"));
-  table
-    .querySelector(`th:nth-child(${column + 1})`)
-    .classList.toggle("th-sort-asc", asc);
-  table
-    .querySelector(`th:nth-child(${column + 1})`)
-    .classList.toggle("th-sort-desc", !asc);
+  table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+  table.querySelector(`th[data-column="${column}"]`).classList.toggle("th-sort-asc", asc);
+  table.querySelector(`th[data-column="${column}"]`).classList.toggle("th-sort-desc", !asc);
 }
