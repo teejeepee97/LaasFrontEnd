@@ -1,155 +1,156 @@
 #TMTable {
-    margin: 20px auto;
-    width: 90%;
-    border-collapse: collapse;
-    text-align: left;
+  margin: 20px auto;
+  width: 90%;
+  border-collapse: collapse;
+  text-align: left;
 }
-  
+
 #TMTable table {
-    width: 100%;
-    border: 1px solid var(--wt-lichtst-grijs);
-}
-  
-#TMTable th, #TMTable td {
-    padding: 12px;
-    border: 1px solid var(--wt-licht-grijs);
-}
-  
-#TMTable th {
-    background-color: var(--wt-lichtst-grijs);
+  width: 100%;
+  border: 1px solid var(--wt-lichtst-grijs);
 }
 
-.available{
-    width: 10%;
+#TMTable th,
+#TMTable thead tr {
+  background-color: black;
+  color: white;
+  border-spacing: 0;
+  cursor: pointer;
+  text-align: center;
 }
 
-.Wear{
-    width: 10%;
+.available {
+  width: 10%;
 }
 
-.reserve{
-    width: 10%;
+.Wear {
+  width: 10%;
 }
-  
+
+.reserve {
+  width: 10%;
+}
+
 .status {
-    display:flex;
-    justify-content: space-between;
-    position: relative;
-    padding: 5px 20px;
-    font-weight: bold;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 5px 20px;
+  font-weight: bold;
+  color: white;
 }
 
 .status-true {
-    background-color: var(--wt-donker-groen);
+  background-color: var(--wt-donker-groen);
 }
 
 .status-false {
-    background-color: red;
+  background-color: red;
 }
 
 .status::after {
-    content: '';
-    display: inline-block;
-    margin-right: 10px;
-    vertical-align: middle;
+  content: "";
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
 .status-true::after {
-    content: '✔';
-    background-color: var(--wt-donker-groen);
-    color: white;
+  content: "✔";
+  background-color: var(--wt-donker-groen);
+  color: white;
 }
 
 .status-false::after {
-    content: '✘';
-    background-color: red;
-    color: white;
+  content: "✘";
+  background-color: red;
+  color: white;
 }
 
 .reserve-button {
-    font-size: 1.1rem;
-    border-radius: 5px;
-    outline: none;
-    border: none;
-    width: 100%;
-    background: var(--wt-grijs);
-    color: white;
-    cursor: pointer;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  width: 80%;
+  background: var(--wt-grijs);
+  color: white;
+  cursor: pointer;
+  margin-left: 10%;
 }
 
 .reserve-button:hover {
-    background: #000;
+  background: #000;
 }
 
-.user-container{
-    margin: 0 5%;
+.user-container {
+  margin: 0 5%;
 }
 /* Popup container styling */
 .popup {
-    display: none;
-    position: absolute;
-    width: 250px; /* Adjust width as needed */
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+  display: none;
+  position: absolute;
+  width: 250px; /* Adjust width as needed */
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 /* Remove bullets from the list */
 #traineeList {
-    list-style-type: none;
-    padding-left: 0; /* Remove left padding to align the text properly */
+  list-style-type: none;
+  padding-left: 0; /* Remove left padding to align the text properly */
 }
 
 /* Style for the "Reserve for Self" option */
 .reserve-self a {
-    color: white;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    text-decoration: none;
-    display: inline-block;
-    border: solid var(--wt-grijs);
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-block;
+  border: solid var(--wt-grijs);
 }
 
 /* Style for selected "Reserve for Self" option */
 .reserve-self.selected a {
-    background-color: #d0e0ff; /* Highlight color for selected item */
-    color: #0056b3; /* Text color for selected item */
+  background-color: #d0e0ff; /* Highlight color for selected item */
+  color: #0056b3; /* Text color for selected item */
 }
 
 /* General styling for other trainee options */
 #traineeList li a {
-    text-decoration: none;
-    color: #333;
-    padding: 5px;
-    display: block;
+  text-decoration: none;
+  color: #333;
+  padding: 5px;
+  display: block;
 }
 
 /* Hover effect for other trainee options */
 #traineeList li a:hover {
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
 /* Highlight for selected item */
 #traineeList li a.selected {
-    background-color: #d0e0ff; /* Highlight color for selected item */
-    color: #0056b3; /* Text color for selected item */
+  background-color: #d0e0ff; /* Highlight color for selected item */
+  color: #0056b3; /* Text color for selected item */
 }
 
 /* Popup close button styling */
 .popup button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    cursor: pointer;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
 }
 
 /* Hover effect for the close button */
 .popup button:hover {
-    background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }

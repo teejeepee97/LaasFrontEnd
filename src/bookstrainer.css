@@ -95,13 +95,14 @@
   text-align: center;
 }
 .table-sortable {
-  border-spacing: 0;
-  border-top: 0;
   padding: 10px 0 30px;
   width: 90%; /* Line width is 75% of the container */
   margin-left: 5%;
 }
 
+.table-sortable table {
+  border: 1px solid var(--wt-lichtst-grijs);
+}
 .table-sortable td {
   cursor: pointer;
   text-align: center;
@@ -127,16 +128,58 @@
 /* Cell color classes */
 /* Cell color classes for Physical Wear */
 .good {
-  background-color: #d4edda; /* Light green for GOOD */
-  color: #155724; /* Dark green text for contrast */
+  background-color: rgba(1, 50, 32, 0.6); /* Light green for GOOD */
+  color: white; /* Dark green text for contrast */
 }
 
 .medium {
-  background-color: #fff3cd; /* Light yellow for MEDIUM */
-  color: #856404; /* Dark yellow text for contrast */
+  background-color: rgba(255, 165, 60, 0.6);
+  color: white; /* Dark yellow text for contrast */
 }
 
 .bad {
-  background-color: #f8d7da; /* Light red for BAD */
-  color: #721c24; /* Dark red text for contrast */
+  background-color: rgba(255, 0, 0, 0.6);
+  color: white; /* Dark red text for contrast */
+}
+
+.inafwachting {
+  background-color: rgba(255, 0, 0, 0.6);
+  color: white;
+}
+
+.uitgeleend {
+  background-color: rgba(255, 165, 60, 0.6);
+  color: white;
+}
+
+.teruggebracht {
+  background-color: rgba(1, 50, 32, 0.6);
+  color: white;
+}
+
+.inafwachting::after {
+  content: " →";
+  color: white;
+}
+
+.uitgeleend::after {
+  content: " ✘";
+  color: white;
+}
+
+.teruggebracht::after {
+  content: " ✔";
+  color: white;
+}
+
+.uitgeleend ::after {
+  content: " ✘";
+  background-color: red;
+  color: white;
+}
+
+.uitgeleend ::after {
+  content: " ✘";
+  background-color: rgba(255, 0, 0, 0.2);
+  color: white;
 }
