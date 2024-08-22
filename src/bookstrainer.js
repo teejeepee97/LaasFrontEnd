@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function showReservations() {
   console.log("Fetching reservations...");
   try {
-    const response = await fetch("http://localhost:8082/showReservations/");
+    const response = await fetch("http://localhost:8082/showReservations");
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
@@ -32,6 +32,7 @@ async function showReservations() {
           <tr>
             <th>Name</th>
             <th>Content Name</th>
+            <th>Content ID</th>
             <th>Date</th>
             <th>Physical Wear</th>
             <th>Reservation Status</th>
@@ -45,8 +46,9 @@ async function showReservations() {
         <tr>
           <td>${item.userName}</td>
           <td>${item.book.contentName}</td>
+          <td>${item.contentId}</td>
           <td>${item.reservationDate}</td>
-          <td class="physical-wear">${item.book.physicalWear}</td>
+          <td>${item.book.physicalWear}</td>
           <td>${item.reservationStatus}</td>
         </tr>
       `;
@@ -84,53 +86,36 @@ async function showReservations() {
 // Function to recolor table cells based on their text content
 function recolorCells() {
   // Get the table element by class
-  const table = document.querySelector("#reservationsTable .table-sortable");
+  const table = document.querySelector("#reservationsTable .table");
   if (!table) return; // Exit if table is not found
 
   // Get all rows from the table body
   const rows = table.querySelectorAll("tbody tr");
 
   rows.forEach((row) => {
-    // Get the cell containing the physical wear value (assumed to be the 5th cell)
-    const physicalWearCell = row.cells[4]; // Index is 0-based (5th column)
-    const wearText = physicalWearCell.textContent.trim().toUpperCase(); // Normalize text for comparison
-
-    const ReservationStatusCell = row.cells[5]; // Index is 0-based (6th column)
-    const ReservationStatusText = ReservationStatusCell.textContent
-      .trim()
-      .toUpperCase();
+    // Get the cell containing the value (assumed to be in the last cell)
+    const valueCell = row.cells[row.cells.length - 1]; // Adjust if needed
+    const cellText = valueCell.textContent.trim().toUpperCase(); // Normalize text for comparison
 
     // Apply a different color based on the cell content
-    physicalWearCell.classList.remove("good", "medium", "bad"); // Remove any existing classes
-    ReservationStatusCell.classlist.remove(
-      "Requested",
-      "uitgeleend",
-      "in_afwachting"
-    );
+    valueCell.classList.remove("good", "medium", "bad"); // Remove any existing classes
 
-    if (wearText === "GOOD") {
-      physicalWearCell.classList.add("good");
-    } else if (wearText === "MEDIUM") {
-      physicalWearCell.classList.add("medium");
-    } else if (wearText === "BAD") {
-      physicalWearCell.classList.add("bad");
-    }
-    if (ReservationStatusText === "IN_AFWACHTING") {
-      physicalWearCell.classList.add("good");
-    } else if (wearText === "UITGELEEND") {
-      physicalWearCell.classList.add("medium");
-    } else if (wearText === "REQUESTED") {
-      physicalWearCell.classList.add("bad");
+    if (cellText === "GOOD") {
+      valueCell.classList.add("good");
+    } else if (cellText === "MEDIUM") {
+      valueCell.classList.add("medium");
+    } else if (cellText === "BAD") {
+      valueCell.classList.add("bad");
     }
   });
 }
 
+// Updated sortTableByColumn function
 function sortTableByColumn(table, column, asc = true) {
   const dirModifier = asc ? 1 : -1;
-  const tBody = table.tBodies[0];
+  const tBody = table.querySelector("tbody");
   const rows = Array.from(tBody.querySelectorAll("tr"));
 
-  // Sort each row
   const sortedRows = rows.sort((a, b) => {
     const aColText = a
       .querySelector(`td:nth-child(${column + 1})`)
@@ -139,7 +124,25 @@ function sortTableByColumn(table, column, asc = true) {
       .querySelector(`td:nth-child(${column + 1})`)
       .textContent.trim();
 
-    return aColText > bColText ? 1 * dirModifier : -1 * dirModifier;
+    // Determine if column is numeric or text
+    const aIsNumeric = !isNaN(parseFloat(aColText)) && isFinite(aColText);
+    const bIsNumeric = !isNaN(parseFloat(bColText)) && isFinite(bColText);
+
+    if (column === 2) {
+      // Assuming Content ID is the third column (index 2)
+      console.log(`Content ID value: ${aColText}, Type: ${typeof aColText}`);
+      console.log(
+        `Content ID value (parsed): ${parseFloat(
+          aColText
+        )}, Type: ${typeof parseFloat(aColText)}`
+      );
+    }
+
+    if (aIsNumeric && bIsNumeric) {
+      return (parseFloat(aColText) - parseFloat(bColText)) * dirModifier;
+    } else {
+      return aColText.localeCompare(bColText) * dirModifier;
+    }
   });
 
   // Remove all existing TRs from the table
